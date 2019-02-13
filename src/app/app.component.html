@@ -1,20 +1,38 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <h1>Welcome to {{ title }}!</h1>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<div class="ui-g">
+  <div class="ui-g-12">
+    <p-panel header="Please input image urls here (you can input multiple urls)">
+      <div>
+        <textarea pInputTextarea [(ngModel)]="inputUrls" [rows]="10" [cols]="100"></textarea>
+      </div>
+    </p-panel>
+  </div>
+</div>
+<div class="ui-g">
+  <div class="ui-g-5">
+    <p-panel header="Original Images">
+      <ng-container *ngIf="inputUrls">
+        <ng-container *ngFor="let url of inputUrls.split('\n')">
+          <div>
+            <img src="{{ url }}" />
+          </div>
+        </ng-container>
+      </ng-container>
+    </p-panel>
+  </div>
+  <div class="ui-g-2">
+    <button (click)="process()">Process</button>
+  </div>
+  <div class="ui-g-5">
+    <p-panel header="Images processed by darkflow">
+      <ng-container *ngFor="let url of outputUrls">
+        <div>
+          <img src="{{ url }}" />
+        </div>
+      </ng-container>
+    </p-panel>
+  </div>
+</div>
