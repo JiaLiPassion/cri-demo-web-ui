@@ -19,8 +19,9 @@ export class AppComponent {
       return;
     }
     this.httpClient.get('assets/config/config.json').subscribe((config: any) => {
+      const urls = this.inputUrls.split('\n').filter(u => !!u.trim());
       this.httpClient
-        .post(`${config.serverUrl}/recognize`, { image_urls: this.inputUrls.split('\n') })
+        .post(`${config.serverUrl}/recognize`, { image_urls: urls })
         .subscribe((r: any) => {
           this.outputUrls = r.map(imgUrl => `${config.serverUrl}${imgUrl}`);
         });
